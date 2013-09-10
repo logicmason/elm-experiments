@@ -1,9 +1,11 @@
 import Mouse
 
-draw (w,h) =
-  let x = (toFloat w)
-      y = (toFloat h)
-  in collage 500 500
+draw x y = collage 500 500
         [filled red (rect x y)]
 
-main = lift draw Mouse.position
+drawFromMousePosition (w, h) =
+      let x = (toFloat w)
+          y = (toFloat h)
+      in draw x y
+
+main = lift drawFromMousePosition Mouse.position
