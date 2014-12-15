@@ -1,5 +1,11 @@
--- want to look into caching options.
+-- using an accumulator
 
-fib n = if n < 2 then n else (fib (n-1)) + (fib (n-2))
+fib n =
+  let fib' n acc =
+    if n <= 2
+      then acc
+      else fib' (n-1) ((head acc + (tail >> head) acc) :: acc)
+  in
+    fib' n [1,1] |> head
 
-main = asText <| map (fib) [1..20]
+main = asText <| map (fib) [1..200]
